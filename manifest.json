@@ -1,0 +1,11 @@
+{
+    "name": "Tacky - a pinboard.in extension",
+    "version": "0.1",
+    "description": "A new pinboard.in extension that intends to combine the best features of what is currently offered.",
+    "browser_action": {
+        "default_icon": "icon.png",
+        "default_title": "Tacky"
+    },
+    "permissions": [ "tabs", "http://*/*" ],
+    "background_page": "background.html"
+}

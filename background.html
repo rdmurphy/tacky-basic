@@ -1,0 +1,36 @@
+<html lang="en">
+    <script>
+    
+	(function() {
+        var saveBookmark, encodeQuery, selectionHandle, PINBOARD_POPUP;
+
+        PINBOARD_POPUP = "https://pinboard.in/add?";
+
+        saveBookmark = function(query) {
+            var popupURL;
+            popupURL = PINBOARD_POPUP + encodeQuery(query);
+            window.open(popupURL,"Pinboard","toolbar=no,width=700,height=350");
+        }
+        
+        encodeQuery = function(query) {
+            var str, s;
+            str = [];
+            for(s in query) {
+                str.push(s + "=" + encodeURIComponent(query[s]));
+            }
+            return str.join("&");
+        }
+        
+        selectionHandle = function(pageInfo) {   
+            saveBookmark(pageInfo);
+            chrome.extension.onRequest.removeListener(window.selectionHandle);
+        }
+        
+        chrome.browserAction.onClicked.addListener( function(tab) {
+            chrome.extension.onRequest.addListener(selectionHandle);
+            chrome.tabs.executeScript(null, { file: "selection.js" });
+        });
+	})();
+	
+    </script>
+</html>
