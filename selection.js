@@ -1,9 +1,5 @@
-var pageInfo;
-
-pageInfo = {
+chrome.extension.sendRequest({
 	"title": document.title,
 	"url": document.URL,
 	"description": window.getSelection().toString()
-}
-
-chrome.extension.sendRequest(pageInfo);
+});

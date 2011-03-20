@@ -9,7 +9,7 @@
         saveBookmark = function(query) {
             var popupURL;
             popupURL = PINBOARD_POPUP + encodeQuery(query);
-            window.open(popupURL,"Pinboard","toolbar=no,width=700,height=350");
+            chrome.windows.create({'url': popupURL, 'width': 700, 'height': 350, 'type': 'popup'});
         }
         
         encodeQuery = function(query) {
