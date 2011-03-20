@@ -1,8 +1,17 @@
-window.addEventListener("keyup", keyup, false);
+var keyListener;
 
-function keyup(e)
-{
-if (e.keyCode != 13) {
- alert(e.keyCode);
- }
+keyListener = function(e) {
+	if (e.altKey && e.keyCode === 80) { // currently alt + 'p'
+		chrome.extension.sendRequest({
+			"title": document.title,
+			"url": document.URL,
+			"description": window.getSelection().toString()
+		});
+	} else {
+		return;
+	}
+}
+
+if(window === top) {
+	window.addEventListener("keyup", keyListener, false);
 }

@@ -2,7 +2,7 @@
     <script>
     
 	(function() {
-        var PINBOARD_POPUP, shortcutKey, saveBookmark, encodeQuery, selectionHandle, keyListener;
+        var PINBOARD_POPUP, shortcutKey, saveBookmark, encodeQuery, selectionHandle, keyFire;
 
         PINBOARD_POPUP = "https://pinboard.in/add?";
 
@@ -21,15 +21,16 @@
             return str.join("&");
         }
         
-        selectionHandle = function(pageInfo) {   
+        selectionHandle = function(pageInfo) {
             saveBookmark(pageInfo);
-            chrome.extension.onRequest.removeListener(window.selectionHandle);
         }
         
-        chrome.browserAction.onClicked.addListener( function(tab) {
-            chrome.extension.onRequest.addListener(selectionHandle);
+        executeFire = function(tab) {
             chrome.tabs.executeScript(null, { file: "selection.js" });
-        });
+        }
+        
+        chrome.extension.onRequest.addListener(selectionHandle);
+        chrome.browserAction.onClicked.addListener(executeFire);
 	})();
 	
     </script>

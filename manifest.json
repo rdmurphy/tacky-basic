@@ -1,6 +1,6 @@
 {
-    "name": "Tacky - a pinboard.in extension",
-    "version": "0.1",
+    "name": "Tacky (Basic) - a pinboard.in extension",
+    "version": "0.5",
     "description": "A new pinboard.in extension that intends to combine the best features of what is currently offered.",
     "browser_action": {
         "default_icon": "icon.png",
@@ -8,10 +8,10 @@
     },
     "content_scripts": [
         {
-            "matches": ["http://*/*"],
-            "js": ["key_listen.js"]
+            "matches": [ "http://*/*", "https://*/*" ],
+            "js": [ "key_listen.js" ]
         }
     ],
-    "permissions": [ "tabs", "http://*/*" ],
+    "permissions": [ "tabs", "http://*/*", "https://*/*" ],
     "background_page": "background.html"
 }
